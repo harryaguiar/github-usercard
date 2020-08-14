@@ -4,12 +4,21 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+let resArray = [];
 axios
   .get(`https://api.github.com/users/harryaguiar`)
   .then((res) => {
     // if the call is successful, it runs this callback
     console.log('Here is the res: ', res);
   
+    resArray = res.data;
+    console.log(`Array:`, resArray);
+    cards.appendChild(githubCard(resArray));
+    // res.data.forEach((e) => {
+    //   cards.append(githubCard(e));
+    //   });
+
   })
   .catch((err) => {
     // if the call is unsuccessful, it runs this callback
@@ -40,8 +49,83 @@ axios
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+let followersArray = [];
 
+axios
+  .get(`https://api.github.com/users/tetondan`)
+  .then((res) => {
+    // if the call is successful, it runs this callback
+    console.log('Here is the res: ', res);
+  
+    followersArray = res.data;
+    console.log(`Array:`, resArray);
+    cards.appendChild(githubCard(followersArray));
+    // res.data.forEach((e) => {
+    //   cards.append(githubCard(e));
+    //   });
+
+  })
+  .catch((err) => {
+    // if the call is unsuccessful, it runs this callback
+    console.log('Here is the err: ', err);
+  });
+
+  axios
+  .get(`https://api.github.com/users/dustinmyers`)
+  .then((res) => {
+    // if the call is successful, it runs this callback
+    console.log('Here is the res: ', res);
+  
+    followersArray = res.data;
+    console.log(`Array:`, resArray);
+    cards.appendChild(githubCard(followersArray));
+    // res.data.forEach((e) => {
+    //   cards.append(githubCard(e));
+    //   });
+
+  })
+  .catch((err) => {
+    // if the call is unsuccessful, it runs this callback
+    console.log('Here is the err: ', err);
+  });
+
+  axios
+  .get(`https://api.github.com/users/devbrunopaula`)
+  .then((res) => {
+    // if the call is successful, it runs this callback
+    console.log('Here is the res: ', res);
+  
+    followersArray = res.data;
+    console.log(`Array:`, resArray);
+    cards.appendChild(githubCard(followersArray));
+    // res.data.forEach((e) => {
+    //   cards.append(githubCard(e));
+    //   });
+
+  })
+  .catch((err) => {
+    // if the call is unsuccessful, it runs this callback
+    console.log('Here is the err: ', err);
+  });
+
+  axios
+  .get(`https://api.github.com/users/bigknell`)
+  .then((res) => {
+    // if the call is successful, it runs this callback
+    console.log('Here is the res: ', res);
+  
+    followersArray = res.data;
+    console.log(`Array:`, resArray);
+    cards.appendChild(githubCard(followersArray));
+    // res.data.forEach((e) => {
+    //   cards.append(githubCard(e));
+    //   });
+
+  })
+  .catch((err) => {
+    // if the call is unsuccessful, it runs this callback
+    console.log('Here is the err: ', err);
+  });
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
@@ -66,6 +150,7 @@ function githubCard(object){
   const card = document.createElement('div');
   card.classList.add('card');
   const img = document.createElement('img');
+  img.src = object.avatar_url;
   const cardInfo = document.createElement('div');
   cardInfo.classList.add('card-info');
 
@@ -78,22 +163,23 @@ function githubCard(object){
   username.textContent = object.login;
 
   const location = document.createElement('p');
-  location.textContent = `Location:`, object.location;
+  location.textContent = `Location: ${object.location}`;
 
   const profile = document.createElement('p');
-  profile.textContent = `Profile:`
+  profile.textContent = `Profile: `
 
   const githubPage = document.createElement('a');
   githubPage.href = object.html_url;
+  githubPage.textContent = object.html_url;
 
   const followers = document.createElement('p');
-  followers.textContent = `Followers:`, object.followers;
+  followers.textContent = `Followers: ${object.followers}`;
 
   const following = document.createElement('p');
-  following.textContent = `Followers:`, object.following;
+  following.textContent = `Followers: ${object.following}`;
 
   const bio = document.createElement('p');
-  bio.textContent = `Bio:`, object.bio;
+  bio.textContent = `Bio: ${object.bio}`;
   
   card.appendChild(img);
   card.appendChild(cardInfo);
@@ -101,7 +187,7 @@ function githubCard(object){
   cardInfo.appendChild(username);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-  cardInfo.appendChild(githubPage);
+  profile.appendChild(githubPage);
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
@@ -112,10 +198,16 @@ return card;
 };
 
 
-console.log(githubCard());
-// data.forEach(articleData => {
-//   articles.appendChild(articleMaker(articleData));
+// console.log(githubCard());
+
+const cards = document.querySelector('.cards');
+
+
+
+// resArray.forEach(items => {
+//   cards.appendChild(githubCard(items));
 // });
+
 
 /*
   List of LS Instructors Github username's:
