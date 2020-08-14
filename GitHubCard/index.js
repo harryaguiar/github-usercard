@@ -1,8 +1,20 @@
+import axios from 'axios';
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios
+  .get(`https://api.github.com/users/harryaguiar`)
+  .then((res) => {
+    // if the call is successful, it runs this callback
+    console.log('Here is the res: ', res);
+  
+  })
+  .catch((err) => {
+    // if the call is unsuccessful, it runs this callback
+    console.log('Here is the err: ', err);
+  });
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -49,6 +61,61 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function githubCard(object){
+  const card = document.createElement('div');
+  card.classList.add('card');
+  const img = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  cardInfo.classList.add('card-info');
+
+  const name = document.createElement('h3');
+  name.classList.add('name');
+  name.textContent = object.name;
+
+  const username = document.createElement('p');
+  username.classList.add('username');
+  username.textContent = object.login;
+
+  const location = document.createElement('p');
+  location.textContent = `Location:`, object.location;
+
+  const profile = document.createElement('p');
+  profile.textContent = `Profile:`
+
+  const githubPage = document.createElement('a');
+  githubPage.href = object.html_url;
+
+  const followers = document.createElement('p');
+  followers.textContent = `Followers:`, object.followers;
+
+  const following = document.createElement('p');
+  following.textContent = `Followers:`, object.following;
+
+  const bio = document.createElement('p');
+  bio.textContent = `Bio:`, object.bio;
+  
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(githubPage);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+
+return card;
+
+};
+
+
+console.log(githubCard());
+// data.forEach(articleData => {
+//   articles.appendChild(articleMaker(articleData));
+// });
 
 /*
   List of LS Instructors Github username's:
